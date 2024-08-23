@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Add a New Recipe</h2>
+<form method="POST">
+    <div>
+        <label for="name">Recipe Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+    </div>
+    <div>
+        <label for="is_private">Private:</label>
+        <input type="checkbox" id="is_private" name="is_private" value="1" checked>
+    </div>
+    
+    <h3>Ingredients</h3>
+    <div id="ingredients-container">
+        <div class="ingredient-item">
+            <input type="text" name="ingredients[]" placeholder="Ingredient" required>
+            <input type="text" name="quantities[]" placeholder="Quantity" required>
+            <input type="text" name="units[]" placeholder="Unit of Measure" required>
+        </div>
+    </div>
+    <button type="button" onclick="addIngredient()">Add Another Ingredient</button>
+    
+    <h3>Instructions</h3>
+    <div id="instructions-container">
+        <div class="instruction-item">
+            <textarea name="instructions[]" placeholder="Instruction" required></textarea>
+        </div>
+    </div>
+    <button type="button" onclick="addInstruction()">Add Another Instruction</button>
+
+    <button type="submit">Add Recipe</button>
+</form>
+
+<script>
+    function addIngredient() {
+        var container = document.getElementById("ingredients-container");
+        var newIngredient = document.createElement("div");
+        newIngredient.classList.add("ingredient-item");
+        newIngredient.innerHTML = `
+            <input type="text" name="ingredients[]" placeholder="Ingredient" required>
+            <input type="text" name="quantities[]" placeholder="Quantity" required>
+            <input type="text" name="units[]" placeholder="Unit of Measure" required>
+        `;
+        container.appendChild(newIngredient);
+    }
+
+    function addInstruction() {
+        var container = document.getElementById("instructions-container");
+        var newInstruction = document.createElement("div");
+        newInstruction.classList.add("instruction-item");
+        newInstruction.innerHTML = `
+            <textarea name="instructions[]" placeholder="Instruction" required></textarea>
+        `;
+        container.appendChild(newInstruction);p
+    }
+</script>
+{% endblock %}
